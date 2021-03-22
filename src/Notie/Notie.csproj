@@ -2,6 +2,21 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <PackageId>Notie</PackageId>
+        <Title>Notie</Title>
+        <Version>1.0.0</Version>
+        <License>MIT</License>
+        <Authors>Iury Ferreira</Authors>
+        <Company>Iury Ferreira</Company>
+        <Icon>https://github.com/iuryferreira/notie/blob/main/.github/assets/logo.png</Icon>
+        <RepositoryUrl>https://github.com/iuryferreira/notie</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/iuryferreira/notie</PackageProjectUrl>
+        <PackageTags>Notification;DDD;Domain;Alert;Notie;Validation;Pattern;</PackageTags>
+        <Description>Notie is a C# library for use Notification Pattern, commonly used in DDD.</Description>
+        <Summary>Notie is a C# library for use Notification Pattern, commonly used in DDD.</Summary>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <License>https://github.com/git/git-scm.com/blob/master/MIT-LICENSE.txt</License>
+        <DefaultVersion Condition="'$(Version)' == ''">1.0.0</DefaultVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="9.5.3" />
