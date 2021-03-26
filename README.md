@@ -6,19 +6,20 @@
 </h3>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/badge/language-1-blue">
 
-  <a href="">
-    <img alt="Made by Iury Ferreira" src="https://img.shields.io/badge/made%20by-Iury%20Ferreira-blue">
+  <a href="https://dotnet.microsoft.com/">
+    <img alt="GitHub language count" src="https://img.shields.io/badge/language-1-blue">
   </a>
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
+  <a href="https://github.com/iuryferreira/">
+    <img alt="Made by Iury Ferreira" src="https://img.shields.io/badge/made%20by-Iury%20Ferreira-blue">
+  </a>
 
   <a href="https://nuget.org/packages/Notie">
     <img alt="Version" src="https://img.shields.io/nuget/v/notie">
   </a>
 
-<a href="">
+<a href="https://nuget.org/packages/Notie">
     <img alt="Downloads" src="https://img.shields.io/nuget/dt/notie">
  </a>
  
@@ -26,6 +27,11 @@
   <img src='https://coveralls.io/repos/github/iuryferreira/notie/badge.svg?branch=main' alt='Coverage Status'/>
 </a>
 
+<a href="hhttps://github.com/iuryferreira/notie/actions/workflows/publish.yaml">
+    <img alt="Version" src="https://github.com/iuryferreira/notie/actions/workflows/publish.yaml/badge.svg?branch=main">
+</a>
+
+</p>
 ### ✌ Hello!
 
 Notie is a simple way to implement the Notification Pattern to notify your validations. A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want. Do what you want! 😄
