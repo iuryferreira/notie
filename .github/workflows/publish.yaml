@@ -1,0 +1,34 @@
+name: Build and Deploy to Nuget Gallery
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'    
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Test
+        run: dotnet test --nologo /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../../coverage/lcov.info"
+      - name: Publish coverage report to coveralls.io
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create the Package
+        run: dotnet pack --configuration Release
+
+      - name: Publish
+        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
