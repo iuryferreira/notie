@@ -8,17 +8,23 @@
         <License>MIT</License>
         <Authors>Iury Ferreira</Authors>
         <Company>Iury Ferreira</Company>
-        <Icon>https://github.com/iuryferreira/notie/blob/main/.github/assets/logo.png</Icon>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
         <RepositoryUrl>https://github.com/iuryferreira/notie</RepositoryUrl>
         <PackageProjectUrl>https://github.com/iuryferreira/notie</PackageProjectUrl>
         <PackageTags>Notification;DDD;Domain;Alert;Notie;Validation;Pattern;</PackageTags>
-        <Description>Notie is a C# library for use Notification Pattern, commonly used in DDD.</Description>
+        <Description>Notie is a C# library for use Notification Pattern, commonly used in DDD. 
+        Notie is a simple way to implement the Notification Pattern to notify your validations. 
+        A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want.</Description>
         <Summary>Notie is a C# library for use Notification Pattern, commonly used in DDD.</Summary>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <License>https://github.com/git/git-scm.com/blob/master/MIT-LICENSE.txt</License>
-        <DefaultVersion Condition="'$(Version)' == ''">1.0.0</DefaultVersion>
+        <DefaultVersion Condition="'$(Version)' == ''">1.0.1</DefaultVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="9.5.3" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="../../LICENSE.md" Pack="true" PackagePath="LICENSE.md"/>
+        <None Include="../../.github/assets/icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>
