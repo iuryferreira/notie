@@ -35,7 +35,7 @@ namespace Notie
                     _notifications.Clear();
                 }
 
-                _notifications?.AddRange(notifications);
+                _notifications.AddRange(notifications);
             }
             catch (ArgumentNullException)
             {
