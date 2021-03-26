@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <PackageId>Notie</PackageId>
         <Title>Notie</Title>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <License>MIT</License>
         <Authors>Iury Ferreira</Authors>
         <Company>Iury Ferreira</Company>
@@ -18,7 +18,7 @@
         A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want.</Description>
         <Summary>Notie is a C# library for use Notification Pattern, commonly used in DDD.</Summary>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <DefaultVersion Condition="'$(Version)' == ''">1.0.1</DefaultVersion>
+        <DefaultVersion Condition="'$(Version)' == ''">1.0.2</DefaultVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="9.5.3" />
