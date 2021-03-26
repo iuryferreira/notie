@@ -30,5 +30,6 @@ namespace Notie.Contracts
         public abstract void AddNotifications (IEnumerable<Notification> notifications, bool overwrite = false);
         public abstract void AddNotificationsByFluent (ValidationResult validationResult);
         public abstract void SetNotificationType (NotificationType type);
+        public abstract void Clear ();
     }
 }

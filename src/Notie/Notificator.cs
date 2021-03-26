@@ -9,7 +9,7 @@ namespace Notie
 {
     /// <summary>
     /// The Notificator class.
-    /// Contains all methods and fields for performing notification functions.
+    /// Contains all methods and fields for performing notification functiPns.
     /// </summary>
     /// <remarks>
     /// <para>This class execute behaviors for handle notifications.</para>
@@ -63,6 +63,11 @@ namespace Notie
         public override void SetNotificationType (NotificationType type)
         {
             NotificationType = type ?? throw new NotificationTypeIsNullException();
+        }
+
+        public override void Clear ()
+        {
+            _notifications.Clear();
         }
     }
 }

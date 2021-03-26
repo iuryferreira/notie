@@ -45,5 +45,9 @@ namespace Notie.Contracts
         /// <exception cref="Notie.Exceptions.NotificationTypeIsNullException">The exception is thrown when a null
         /// type is passed to the method that does not allow this operation.</exception>
         void SetNotificationType (NotificationType type);
+        /// <summary>
+        /// Remove all notifications.
+        /// </summary>
+        void Clear ();
     }
 }
