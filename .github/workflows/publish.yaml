@@ -36,7 +36,7 @@ jobs:
         run: dotnet pack --configuration Release
 
       - name: Add Github to Nuget source
-        run: dotnet nuget add source -n github https://nuget.pkg.github.com/iuryferreira/notie/index.json" --username iuryferreira --password ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget add source -n github "https://nuget.pkg.github.com/iuryferreira/notie/index.json" --username iuryferreira --password ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to Github
         run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -s github
