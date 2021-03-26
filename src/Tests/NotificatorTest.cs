@@ -49,6 +49,11 @@ namespace Tests
             _sut.AddNotification(new("any_key", "any_message"));
             List<Notification> notifications = new() { new("any_key", "any_message"), new("any_key", "any_message") };
             _sut.AddNotifications(notifications);
+            if (_sut.HasNotifications)
+            {
+
+                // Handle...
+            }
             Assert.AreEqual(3, _sut.Notifications.Count);
         }
 
@@ -92,6 +97,16 @@ namespace Tests
             _sut = new Notificator();
             _sut.SetNotificationType(new("Validation"));
             Assert.AreEqual(_sut.NotificationType.Name, "Validation");
+        }
+
+        [TestMethod]
+        public void Clear_method_Should_Clear_all_Notifications ()
+        {
+            _sut = new Notificator();
+            List<Notification> notifications = new() { new("any_key", "any_message"), new("any_key", "any_message") };
+            _sut.AddNotifications(notifications);
+            _sut.Clear();
+            Assert.IsFalse(_sut.HasNotifications);
         }
 
         private class ExampleEntity
