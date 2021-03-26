@@ -15,12 +15,16 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
 
   <a href="https://nuget.org/packages/Notie">
-    <img alt="Made by Iury Ferreira" src="https://img.shields.io/nuget/v/notie">
+    <img alt="Version" src="https://img.shields.io/nuget/v/notie">
   </a>
 
 <a href="">
-    <img alt="Made by Iury Ferreira" src="https://img.shields.io/nuget/dt/notie">
-  </a>
+    <img alt="Downloads" src="https://img.shields.io/nuget/dt/notie">
+ </a>
+ 
+<a href='https://coveralls.io/github/iuryferreira/notie?branch=main'>
+  <img src='https://coveralls.io/repos/github/iuryferreira/notie/badge.svg?branch=main' alt='Coverage Status'/>
+</a>
 
 ### ✌ Hello!
 
