@@ -74,7 +74,12 @@ using Notie;
 
 // your validation here...
 
-List<Notification> notifications = new() { new("any_key", "any_message"), new("other_key", "other_message") };
+List<Notification> notifications = new()
+{
+  new("any_key", "any_message"),
+  new("other_key", "other_message")
+};
+
 var notificator = new Notificator();
 
 notificator.AddNotifications(notifications);
@@ -96,7 +101,12 @@ var notificator = new Notificator();
 var notification = new Notification(key: "any_key", message: "any_message");
 notificator.AddNotification(notification);
 
-List<Notification> notifications = new() { new("any_key", "any_message"), new("other_key", "other_message") };
+List<Notification> notifications = new()
+{
+  new("any_key", "any_message"),
+  new("other_key", "other_message")
+};
+
 var notificator = new Notificator();
 
 notificator.AddNotifications(notifications, true);
