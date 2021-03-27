@@ -37,11 +37,11 @@ jobs:
         run: dotnet pack --configuration Release
 
       - name: Publish to Github
-        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/iuryferreira/index.json
+        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/iuryferreira/index.json --skip-duplicate
 
       - name: Publish to Nuget Gallery
-        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Set tag to version  
-        run: dotnet TagToVersion -t ${{ github.ref }}
+        run: dotnet TagToVersion -t ${{ github.ref }} -f src/Notie/Directory.Build.props
 
