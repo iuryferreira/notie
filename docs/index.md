@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Notie" title="Notie" src=".github/assets/logo.png" width="400px" />
+  <img alt="Notie" title="Notie" src="../.github/assets/logo.png" width="400px" />
 </p>
 <h3 align="center">
     Your notifications in a simpler way on .NET
