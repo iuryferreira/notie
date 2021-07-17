@@ -5,13 +5,10 @@ using Notie.Models;
 namespace Notie.Contracts
 {
     /// <summary>
-    /// The Notificator interface.
-    /// Is responsible for defining what actions a validator should contain.
+    ///     The Notifier interface.
+    ///     Is responsible for defining what actions a validator should contain.
     /// </summary>
-    /// <remarks>
-    /// <para>This interface defines behaviors for adding notifications.</para>
-    /// </remarks>
-    public interface INotificator
+    public interface INotifier
     {
         /// <summary>
         /// Add a notification to the notification list.

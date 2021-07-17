@@ -6,17 +6,17 @@ using Notie.Models;
 namespace Notie.Contracts
 {
     /// <summary>
-    /// The Notificator abstract class.
-    /// Contains all methods and fields for performing notification functions.
+    ///     The Notificator abstract class.
+    ///     Contains all methods and fields for performing notification functions.
     /// </summary>
     /// <remarks>
-    /// <para>This abstract class defines behaviors and query fields for adding notifications.</para>
+    ///     <para>This abstract class defines behaviors and query fields for adding notifications.</para>
     /// </remarks>
-    public abstract class AbstractNotificator : INotificator
+    public abstract class AbstractNotifier : INotifier
     {
         private protected readonly List<Notification> _notifications;
 
-        protected AbstractNotificator ()
+        protected AbstractNotifier ()
         {
             _notifications = new();
             NotificationType = new("Default");
