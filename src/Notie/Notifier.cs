@@ -60,7 +60,7 @@ namespace Notie
             }
         }
 
-        public override void SetNotificationType (NotificationType type)
+        public override void SetNotificationType (string type)
         {
             NotificationType = type ?? throw new NotificationTypeIsNullException();
         }

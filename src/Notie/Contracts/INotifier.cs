@@ -36,14 +36,17 @@ namespace Notie.Contracts
         void AddNotificationsByFluent (ValidationResult validationResult);
 
         /// <summary>
-        /// Defines the type of notification.
+        ///     Defines the type of notification.
         /// </summary>
         /// <param name="type"></param>
-        /// <exception cref="Notie.Exceptions.NotificationTypeIsNullException">The exception is thrown when a null
-        /// type is passed to the method that does not allow this operation.</exception>
-        void SetNotificationType (NotificationType type);
+        /// <exception cref="Exceptions.NotificationTypeIsNullException">
+        ///     The exception is thrown when a null
+        ///     type is passed to the method that does not allow this operation.
+        /// </exception>
+        void SetNotificationType (string type);
+
         /// <summary>
-        /// Remove all notifications.
+        ///     Remove all notifications.
         /// </summary>
         void Clear ();
     }
