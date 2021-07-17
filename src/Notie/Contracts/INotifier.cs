@@ -11,34 +11,40 @@ namespace Notie.Contracts
     public interface INotifier
     {
         /// <summary>
-        /// Add a notification to the notification list.
+        ///     Add a notification to the notification list.
         /// </summary>
-        /// <param name="notification"></param>
-        /// <exception cref="Notie.Exceptions.NotificationIsNullException">The exception is thrown when a null
-        /// notification is passed to the method that does not allow this operation.</exception>
+        /// <param name="notification">Non-null notification to be inserted into the notifier.</param>
+        /// <exception cref="Exceptions.NotificationIsNullException">
+        ///     The exception is thrown when a null
+        ///     notification is passed to the method that does not allow this operation.
+        /// </exception>
         void AddNotification (Notification notification);
 
         /// <summary>
-        /// Inserts or rewrites a list of notifications in the existing list.
+        ///     Inserts or rewrites a list of notifications in the existing list.
         /// </summary>
-        /// <param name="notifications"></param>
-        /// <param name="overwrite"></param>
-        /// <exception cref="Notie.Exceptions.NotificationIsNullException">The exception is thrown when a null
-        /// notification is passed to the method that does not allow this operation.</exception>
+        /// <param name="notifications">Non-null list of notifications to be inserted into the notifier.</param>
+        /// <param name="overwrite">If true, it overwrites all notifications that already exist in the notifier.</param>
+        /// <exception cref="Exceptions.NotificationIsNullException">
+        ///     The exception is thrown when a null
+        ///     notification is passed to the method that does not allow this operation.
+        /// </exception>
         void AddNotifications (IEnumerable<Notification> notifications, bool overwrite = false);
 
         /// <summary>
-        /// Inserts notifications from a FluentValidation validation.
+        ///     Inserts notifications from a FluentValidation validation.
         /// </summary>
-        /// <param name="validationResult"></param>
-        /// <exception cref="Notie.Exceptions.ValidationResultIsNullException">The exception is thrown when a null
-        /// validation is passed to the method that does not allow this operation.</exception>
+        /// <param name="validationResult">Non-null result of a FluentValidation validator.</param>
+        /// <exception cref="Exceptions.ValidationResultIsNullException">
+        ///     The exception is thrown when a null
+        ///     validation is passed to the method that does not allow this operation.
+        /// </exception>
         void AddNotificationsByFluent (ValidationResult validationResult);
 
         /// <summary>
         ///     Defines the type of notification.
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="type">A name for the type of notifications you are handling.</param>
         /// <exception cref="Exceptions.NotificationTypeIsNullException">
         ///     The exception is thrown when a null
         ///     type is passed to the method that does not allow this operation.
