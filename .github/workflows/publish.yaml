@@ -1,4 +1,4 @@
-name: Build and Deploy to Nuget Gallery
+name: CI
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@main
-
+      
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -22,11 +22,9 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
-      - name: Install dotnet tool tag
-        run: dotnet tool install -g dotnetCampus.TagToVersion
-
       - name: Test
         run: dotnet test --nologo /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../../coverage/lcov.info
+
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@master
         with:
@@ -35,15 +33,9 @@ jobs:
       - name: Create the Package
         run: dotnet pack --configuration Release
 
-      - name: Add Github to Nuget source
-        run: dotnet nuget add source -n github "https://nuget.pkg.github.com/iuryferreira/notie/index.json" --username iuryferreira --password ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publish to Github
-        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -s github
+        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/iuryferreira/index.json --skip-duplicate
 
       - name: Publish to Nuget Gallery
-        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
-
-      - name: Set tag to version  
-        run: dotnet TagToVersion -t ${{ github.ref }}
+        run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
