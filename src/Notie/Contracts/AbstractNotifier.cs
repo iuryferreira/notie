@@ -9,9 +9,6 @@ namespace Notie.Contracts
     ///     The Notificator abstract class.
     ///     Contains all methods and fields for performing notification functions.
     /// </summary>
-    /// <remarks>
-    ///     <para>This abstract class defines behaviors and query fields for adding notifications.</para>
-    /// </remarks>
     public abstract class AbstractNotifier : INotifier
     {
         private protected readonly List<Notification> _notifications;
