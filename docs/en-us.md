@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Notie" title="Notie" src=".github/assets/logo.png" width="400px" />
+  <img alt="Notie" title="Notie" src="../.github/assets/logo.png" width="400px" />
 </p>
 <h3 align="center">
     Your notifications in a simpler way on .NET
@@ -33,7 +33,7 @@
 
 </p>
 
-###### ✌ Hello!
+### ✌ Hello!
 
 Notie is a simple way to implement the Notification Pattern to notify your validations. A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want. Do what you want! 😄
 

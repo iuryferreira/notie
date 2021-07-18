@@ -39,7 +39,7 @@
 
 ### ✌ Olá!
 
-Notie é uma maneira simples de implementar o *Notification Pattern* para notificar suas validações. A diferença é que ele é multifuncional, então você pode usá-lo para notificações em qualquer classe ou camada que desejar. Faça o que você quiser! 😄
+Notie é uma maneira simples de implementar o *Notification Pattern* para agrupar suas validações. A diferença é que ele é multifuncional, então você pode usá-lo para notificações em qualquer classe ou camada que desejar. Faça o que você quiser! 😄
 
 ### 🛠 Instalação
 
@@ -53,11 +53,11 @@ Para instalar pela linha de comando (CLI), basta executar o seguinte comando na 
   dotnet add package Notie
 ```
 
-#### NuGet packages managers (Windows/Mac/Linux)
+#### Gerenciador de pacotes NuGet (Windows/Mac/Linux)
 
 Basta pesquisar por "Notie" em seu Visual Studio/Rider e clicar em adicionar pacote.
 
-### 💻 Usage
+### 💻 Formas de uso
 
 Notie é intuitivo e você pode usar a documentação fornecida pelo código para ajudá-lo, mas também deixarei exemplos aqui.
 
