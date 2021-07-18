@@ -33,7 +33,7 @@
 
 </p>
 
-### ✌ Hello!
+###### ✌ Hello!
 
 Notie is a simple way to implement the Notification Pattern to notify your validations. A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want. Do what you want! 😄
 
@@ -66,12 +66,12 @@ using Notie;
 
 // your validation here...
 
-var notification = new Notification(key: "any_key", message: "any_message");
-var notificator = new Notificator();
+var notification = new Notification("any_key", "any_message");
+var notifier = new Notifier();
 
-notificator.AddNotification(notification);
+notifier.AddNotification(notification);
 
-if (_sut.HasNotifications)
+if (notifier.HasNotifications)
 {
   // Handle...
 }
@@ -91,11 +91,11 @@ List<Notification> notifications = new()
   new("other_key", "other_message")
 };
 
-var notificator = new Notificator();
+var notifier = new Notifier();
 
-notificator.AddNotifications(notifications);
+notifier.AddNotifications(notifications);
 
-if (_sut.HasNotifications)
+if (notifier.HasNotifications)
 {
   // Handle...
 }
@@ -108,9 +108,9 @@ if you want to overwrite previous notifications, just set the `overwrite` parame
 using Notie;
 
 // your validation here...
-var notificator = new Notificator();
-var notification = new Notification(key: "any_key", message: "any_message");
-notificator.AddNotification(notification);
+var notifier = new Notifier();
+var notification = new Notification("any_key", "any_message");
+notifier.AddNotification(notification);
 
 List<Notification> notifications = new()
 {
@@ -118,11 +118,11 @@ List<Notification> notifications = new()
   new("other_key", "other_message")
 };
 
-var notificator = new Notificator();
+var notifier = new Notifier();
 
-notificator.AddNotifications(notifications, true);
+notifier.AddNotifications(notifications, true);
 
-if (_sut.HasNotifications)
+if (notifier.HasNotifications)
 {
   // Handle...
 }
@@ -142,10 +142,10 @@ Entity entity = new Entity();
 EntityValidator validator = new EntityValidator();
 ValidationResult result = validator.Validate(entity);
 
-var notificator = new Notificator();
-notificator.AddNotificationsByFluent(result);
+var notifier = new Notifier();
+notifier.AddNotificationsByFluent(result);
 
-if (_sut.HasNotifications)
+if (notifier.HasNotifications)
 {
   // Handle...
 }
@@ -160,23 +160,21 @@ using Notie;
 
 // In the repository
 
-var notificator = new Notificator();
-notificator.SetNotificationType(new("Repository"));
+var notifier = new Notifier();
+notifier.SetNotificationType("Repository");
 
 // In the Domain
 
-var notificator = new Notificator();
-notificator.SetNotificationType(new("Validation"));
+var notifier = new Notifier();
+notifier.SetNotificationType("Validation");
 
 // In the user service
 
-var notificator = new Notificator();
-notificator.SetNotificationType(new("Service"));
+var notifier = new Notifier();
+notifier.SetNotificationType("Service");
 
 ```
 
 This documentation will be increased as the project progresses, but issues can open, which I will answer as quickly as I can, I am happy with your comment. 😄
-
-### 👋 Bye!
 
 Made with 💻 by Iury :wave: [See my linkedin!](https://www.linkedin.com/in/iury-ferreira-68ba35130/)
