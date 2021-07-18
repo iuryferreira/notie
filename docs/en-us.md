@@ -2,7 +2,7 @@
   <img alt="Notie" title="Notie" src=".github/assets/logo.png" width="400px" />
 </p>
 <h3 align="center">
-    Notificações de maneira simples no .NET
+    Your notifications in a simpler way on .NET
 </h3>
 
 <p align="center">
@@ -33,21 +33,17 @@
 
 </p>
 
-<p align="center" style="font-size:10px">Don't know portuguese? check the documentation in english <a href="docs/en-us.md">here</a>.</p>
+###### ✌ Hello!
 
+Notie is a simple way to implement the Notification Pattern to notify your validations. A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want. Do what you want! 😄
 
+### 🛠 Install
 
-### ✌ Olá!
-
-Notie é uma maneira simples de implementar o *Notification Pattern* para notificar suas validações. A diferença é que ele é multifuncional, então você pode usá-lo para notificações em qualquer classe ou camada que desejar. Faça o que você quiser! 😄
-
-### 🛠 Instalação
-
-Use os meios de instalação abaixo.
+Use the installation means below.
 
 #### CLI (Linux/Windows/Mac)
 
-Para instalar pela linha de comando (CLI), basta executar o seguinte comando na pasta do seu projeto:
+To install via the command line (CLI), just run the following command in your project folder:
 
 ```bash
   dotnet add package Notie
@@ -55,15 +51,15 @@ Para instalar pela linha de comando (CLI), basta executar o seguinte comando na 
 
 #### NuGet packages managers (Windows/Mac/Linux)
 
-Basta pesquisar por "Notie" em seu Visual Studio/Rider e clicar em adicionar pacote.
+Just search for "Notie" in your Visual Studio/Rider and click on add package.
 
 ### 💻 Usage
 
-Notie é intuitivo e você pode usar a documentação fornecida pelo código para ajudá-lo, mas também deixarei exemplos aqui.
+Notie is intuitive and you can use the documentation provided by the code to help you, but I will also leave examples here.
 
-#### Exemplos
+#### Quick Examples
 
-Você pode usá-lo de várias maneiras, mas aqui está um exemplo de como salvar suas notificações:
+You can use it in several ways, but here is an example of what it is like to save your notifications:
 
 ```csharp
 using Notie;
@@ -82,7 +78,7 @@ if (notifier.HasNotifications)
 
 ```
 
-Você pode até receber uma lista de notificações por meio do método `AddNotifications`. Se as notificações já existirem no notificador, elas serão mescladas por padrão. Consultar exemplo:
+You can even receive a list of notifications via the `AddNotifications` method. If notifications already exist in the notifier object, they will be merged by default. See example:
 
 ```csharp
 using Notie;
@@ -106,7 +102,7 @@ if (notifier.HasNotifications)
 
 ```
 
-Se você quiser sobrescrever as notificações anteriores, apenas defina o parâmetro `overwrite` como` true`, conforme mostrado abaixo.
+if you want to overwrite previous notifications, just set the `overwrite` parameter to `true`, as shown below.
 
 ```csharp
 using Notie;
@@ -133,11 +129,11 @@ if (notifier.HasNotifications)
 
 ```
 
-Se você deseja limpar todas as notificações, pode fazê-lo usando o método `Clear`.
+if you want to clear all notifications you can do so using the `Clear` method.
 
-#### Combinando com o FluentValidation
+#### Using with FluentValidation
 
-Você também pode receber notificações do FluentValidation por meio do método `AddNotificationsByFluent`:
+You can also receive notifications from FluentValidation through the `AddNotificationsByFluent` method:
 
 ```csharp
 using Notie;
@@ -155,9 +151,9 @@ if (notifier.HasNotifications)
 }
 ```
 
-#### Definindo tipos de notificação
+#### Defining notification types
 
-Cada notificador pode estar em um contexto diferente, e para isso podemos definir tipos para ele através da propriedade `NotificationType`. Você pode ter notificações de repositório, validação ou qualquer outro serviço que precisar, então você pode separar as notificações de cada contexto e entender qual parte do aplicativo está trazendo as notificações. Por padrão o valor para o `NotificationType` é `"Default"`. Veja o exemplo abaixo:
+Each notifier can be in a different context, and for that we can define types for it through the `NotificationType` property. You can have notifications from repository, validation or any other service you need, so you can separate the notifications from each context and understand which part of the application is bringing the notifications. initial type of `NotificationType` is `"Default"`. See example below:
 
 ```csharp
 using Notie;
@@ -179,4 +175,6 @@ notifier.SetNotificationType("Service");
 
 ```
 
-Essa documentação será incrementada conforme o projeto avança. Caso tenha dúvidas contate-me ou abra uma *issue*, a qual responderei o mais rápido possível. Fico feliz com seu comentário. 😄
+This documentation will be increased as the project progresses, but issues can open, which I will answer as quickly as I can, I am happy with your comment. 😄
+
+Made with 💻 by Iury :wave: [See my linkedin!](https://www.linkedin.com/in/iury-ferreira-68ba35130/)
