@@ -16,7 +16,7 @@ namespace Notie.Contracts
         protected AbstractNotifier ()
         {
             _notifications = new();
-            NotificationType = new("Default");
+            NotificationType = "Default";
         }
 
         public IReadOnlyCollection<Notification> Notifications => _notifications;
