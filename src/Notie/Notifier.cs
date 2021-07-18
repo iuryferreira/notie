@@ -8,13 +8,13 @@ using Notie.Models;
 namespace Notie
 {
     /// <summary>
-    /// The Notificator class.
-    /// Contains all methods and fields for performing notification functiPns.
+    ///     The Notificator class.
+    ///     Contains all methods and fields for performing notification functiPns.
     /// </summary>
     /// <remarks>
-    /// <para>This class execute behaviors for handle notifications.</para>
+    ///     <para>This class execute behaviors for handle notifications.</para>
     /// </remarks>
-    public class Notificator : AbstractNotificator
+    public class Notifier : AbstractNotifier
     {
         public override void AddNotification (Notification notification)
         {
@@ -60,7 +60,7 @@ namespace Notie
             }
         }
 
-        public override void SetNotificationType (NotificationType type)
+        public override void SetNotificationType (string type)
         {
             NotificationType = type ?? throw new NotificationTypeIsNullException();
         }
