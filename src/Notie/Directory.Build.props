@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <Version>1.0.2</Version>
+        <Version>2.0.0</Version>
         <PackageId>Notie</PackageId>
         <Title>Notie</Title>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -14,7 +14,7 @@
         <PackageTags>Notification;DDD;Domain;Alert;Notie;Validation;Pattern;</PackageTags>
         <Description>Notie is a C# library for use Notification Pattern, commonly used in DDD. Notie is a simple way to implement the Notification Pattern to notify your validations. A difference is that it is multi-purpose, so you can use it for notifications in any class or layer you want.</Description>
         <LangVersion>latest</LangVersion>
-        <DefaultVersion Condition="'$(Version)' == ''">1.0.2</DefaultVersion>
+        <DefaultVersion Condition="'$(Version)' == ''">2.0.0</DefaultVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../../LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
