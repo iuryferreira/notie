@@ -1,9 +1,10 @@
 <Project>
     <PropertyGroup>
-        <Version>2.0.0</Version>
+        <Version>2.0.1</Version>
         <PackageId>Notie</PackageId>
         <Title>Notie</Title>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>Iury Ferreira</Authors>
         <Company>Iury Ferreira</Company>
         <PackageIcon>icon.png</PackageIcon>
