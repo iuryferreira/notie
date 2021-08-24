@@ -137,7 +137,7 @@ Se você deseja limpar todas as notificações, pode fazê-lo usando o método `
 
 #### Combinando com o FluentValidation
 
-Você também pode receber notificações do FluentValidation por meio do método `AddNotificationsByFluent`:
+Você também pode receber notificações do FluentValidation por meio do método `AddNotificationsByFluent`, passando um `ValidationResult` e o parâmetro `overwrite` como `true` caso queira limpar as notificações anteriores:
 
 ```csharp
 using Notie;
@@ -147,7 +147,7 @@ EntityValidator validator = new EntityValidator();
 ValidationResult result = validator.Validate(entity);
 
 var notifier = new Notifier();
-notifier.AddNotificationsByFluent(result);
+notifier.AddNotificationsByFluent(result, true);
 
 if (notifier.HasNotifications)
 {
