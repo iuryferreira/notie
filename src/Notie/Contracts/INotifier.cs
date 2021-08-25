@@ -35,11 +35,12 @@ namespace Notie.Contracts
         ///     Inserts notifications from a FluentValidation validation.
         /// </summary>
         /// <param name="validationResult">Non-null result of a FluentValidation validator.</param>
+        /// /// <param name="overwrite">If true, it overwrites all notifications that already exist in the notifier.</param>
         /// <exception cref="Exceptions.ValidationResultIsNullException">
         ///     The exception is thrown when a null
         ///     validation is passed to the method that does not allow this operation.
         /// </exception>
-        void AddNotificationsByFluent (ValidationResult validationResult);
+        void AddNotificationsByFluent (ValidationResult validationResult, bool overwrite = false);
 
         /// <summary>
         ///     Defines the type of notification.
