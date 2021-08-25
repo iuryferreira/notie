@@ -4,6 +4,7 @@
         <PackageId>Notie</PackageId>
         <Title>Notie</Title>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Authors>Iury Ferreira</Authors>
         <Company>Iury Ferreira</Company>
         <PackageIcon>icon.png</PackageIcon>
