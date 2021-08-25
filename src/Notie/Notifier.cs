@@ -43,14 +43,18 @@ namespace Notie
             }
         }
 
-        public override void AddNotificationsByFluent (ValidationResult validationResult)
+        public override void AddNotificationsByFluent (ValidationResult validationResult, bool overwrite = false)
         {
             if (validationResult is null)
             {
                 throw new ValidationResultIsNullException();
             }
 
-            _notifications.Clear();
+            if (overwrite)
+            {
+                _notifications.Clear();
+            }
+
             foreach (var error in validationResult.Errors)
             {
                 var notification = new Notification(
