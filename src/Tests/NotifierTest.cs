@@ -1,108 +1,126 @@
 using System.Collections.Generic;
 using FluentValidation;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Notie;
 using Notie.Contracts;
 using Notie.Exceptions;
 using Notie.Models;
+using Xunit;
 
 namespace Tests
 {
-    [TestClass]
     public class NotifierTest
     {
-        private AbstractNotifier _sut;
+        private INotifier _sut;
 
-        [TestMethod]
-        public void Must_Throw_NotificationIsNullException_If_the_Value_Passed_to_AddNotification_Is_Null ()
+        #region AddNotification
+
+        [Fact(DisplayName = "01 - AddNotification must throw NotificationIsNullException if the notification to add is null")]
+        public void AddNotification_MustThrowNotificationIsNullException_NotificationIsNull ()
         {
             _sut = new Notifier();
-            Assert.ThrowsException<NotificationIsNullException>(() => _sut.AddNotification(null));
+            Assert.Throws<NotificationIsNullException>(() => _sut.AddNotification(null));
         }
+        
+        #endregion
+        
+        #region AddNotifications
 
-        [TestMethod]
-        public void HasNotifications_Property_Must_Return_False_If_No_Notification_Is_Added ()
+        [Fact(DisplayName = "02 - AddNotifications must throw NotificationIsNullException if the list of notifications to add is null")]
+        public void AddNotifications_MustThrowNotificationIsNullException_NotificationsIsNull ()
         {
             _sut = new Notifier();
-            Assert.IsFalse(_sut.HasNotifications);
+            Assert.Throws<NotificationIsNullException>(() => _sut.AddNotifications(null));
         }
 
-        [TestMethod]
-        public void HasNotifications_Property_Must_Return_True_If_Any_Notification_Is_Added ()
-        {
-            _sut = new Notifier();
-            _sut.AddNotification(new("any_key", "any_message"));
-            Assert.IsTrue(_sut.HasNotifications);
-        }
-
-        [TestMethod]
-        public void Must_Return_NotificationIsNullException_If_the_Value_Passed_to_AddNotifications_Is_Null ()
-        {
-            _sut = new Notifier();
-            Assert.ThrowsException<NotificationIsNullException>(() => _sut.AddNotifications(null));
-        }
-
-        [TestMethod]
-        public void AddNotifications_Should_Receive_a_List_of_Notifications_and_Include_Them_in_Existing_Ones ()
+        [Fact(DisplayName = "03 - AddNotifications should receive a list of notifications and include it with the others")]
+        public void AddNotifications_ShouldReceiveNotifications_IncludeItWithOthers ()
         {
             _sut = new Notifier();
             _sut.AddNotification(new("any_key", "any_message"));
             List<Notification> notifications = new() { new("any_key", "any_message"), new("any_key", "any_message") };
             _sut.AddNotifications(notifications);
-            Assert.AreEqual(3, _sut.Notifications.Count);
+            Assert.Equal(3, _sut.All().Count);
         }
 
-        [TestMethod]
-        public void AddNotifications_Must_Overwrite_the_Previous_List_If_the_Overwrite_Property_Is_True ()
+        [Fact(DisplayName = "04 - AddNotifications should overwrite the previous list if overwrite parameter is true")]
+        public void AddNotifications_ShouldOverwritePreviousList_OverwriteParameterIsTrue ()
         {
             _sut = new Notifier();
             _sut.AddNotification(new("any_key", "any_message"));
             List<Notification> notifications = new() { new("any_key", "any_message"), new("any_key", "any_message") };
             _sut.AddNotifications(notifications, true);
-            Assert.AreEqual(2, _sut.Notifications.Count);
+            Assert.Equal(2, _sut.All().Count);
         }
 
-        [TestMethod]
-        public void Must_Throw_NotificationIsNullException_If_the_Value_Passed_to_AddNotificationsByFluent_Is_Null ()
+
+        #endregion
+
+        #region AddNotificationsByFluent
+
+        [Fact(DisplayName = "05 - AddNotificationsByFluent must throw ValidationResultIsNullException if the ValidationResult to add is null")]
+        public void AddNotificationsByFluent_MustThrowValidationResultIsNullException_ValidationResultIsNull ()
         {
             _sut = new Notifier();
-            Assert.ThrowsException<ValidationResultIsNullException>(() => _sut.AddNotificationsByFluent(null));
+            Assert.Throws<ValidationResultIsNullException>(() => _sut.AddNotificationsByFluent(null));
         }
-
-        [TestMethod]
-        public void AddNotificationsByFluent_Must_Receive_a_Result_of_Validation_and_Turn_into_Notifications ()
+        
+        [Fact(DisplayName = "06 - AddNotificationsByFluent must receive ValidationResult and turn into notifications")]
+        public void AddNotificationsByFluent_MustReceiveValidationResult_TurnIntoNotifications ()
         {
             _sut = new Notifier();
             ExampleEntity entity = new();
             var validator = new Validator();
             _sut.AddNotificationsByFluent(validator.Validate(entity));
-            Assert.AreEqual(1, _sut.Notifications.Count);
+            Assert.Equal(1, _sut.All().Count);
         }
-
-        [TestMethod]
-        public void Must_Throw_NotificationTypeIsNullException_If_the_Value_Passed_to_SetNotificationType_Is_Null ()
+        
+        [Fact(DisplayName = "07 - AddNotificationsByFluent should overwrite the previous list if overwrite parameter is true")]
+        public void AddNotificationsByFluent_ShouldOverwritePreviousList_OverwriteParameterIsTrue ()
         {
             _sut = new Notifier();
-            Assert.ThrowsException<NotificationTypeIsNullException>(() => _sut.SetNotificationType(null));
+            _sut.AddNotification(new("any_key", "any_message"));
+            ExampleEntity entity = new();
+            var validator = new Validator();
+            _sut.AddNotificationsByFluent(validator.Validate(entity), true);
+            Assert.Equal(1, _sut.All().Count);
         }
 
-        [TestMethod]
-        public void SetNotificationType_Must_Define_the_Type_of_Notification ()
+        #endregion
+
+        #region HasNotifications
+
+        [Fact(DisplayName = "08 - HasNotifications must return false if no notification is added")]
+        public void HasNotifications_MustReturnFalse_NoNotificationIsAdded ()
         {
             _sut = new Notifier();
-            _sut.SetNotificationType("Validation");
-            Assert.AreEqual(_sut.NotificationType, "Validation");
+            Assert.False(_sut.HasNotifications());
         }
 
-        [TestMethod]
-        public void Clear_method_Should_Clear_all_Notifications ()
+        [Fact(DisplayName = "09 - HasNotifications must return true if any notification is added")]
+        public void HasNotifications_MustReturnTrue_AnyNotificationIsAdded ()
+        {
+            _sut = new Notifier();
+            _sut.AddNotification(new("any_key", "any_message"));
+            Assert.True(_sut.HasNotifications());
+        }
+
+        #endregion
+
+        #region Others
+
+        [Fact(DisplayName = "10 - Clear should remove all notifications")]
+        public void Clear_ShouldRemoveAllNotifications ()
         {
             _sut = new Notifier();
             List<Notification> notifications = new() { new("any_key", "any_message"), new("any_key", "any_message") };
             _sut.AddNotifications(notifications);
             _sut.Clear();
-            Assert.IsFalse(_sut.HasNotifications);
+            Assert.False(_sut.HasNotifications());
         }
+
+        #endregion
+
+        #region Helpers
 
         private class ExampleEntity
         {
@@ -116,5 +134,7 @@ namespace Tests
                 RuleFor(ex => ExampleEntity.Field).NotEmpty();
             }
         }
+
+        #endregion
     }
 }
