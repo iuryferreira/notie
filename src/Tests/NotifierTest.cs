@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentValidation;
 using Notie;
 using Notie.Contracts;
@@ -119,7 +121,113 @@ namespace Tests
         }
 
         #endregion
+        
+        #region GetByKey
 
+        [Fact(DisplayName = "11 - GetByKey must throw ArgumentException if the key is null or empty")]
+        public void GetByKey_MustThrowArgumentException_KeyIsNullOrEmpty ()
+        {
+            _sut = new Notifier();
+            Assert.Throws<ArgumentException>(() => _sut.GetByKey(null));
+        }
+        
+        [Fact(DisplayName = "12 - GetByKey should return a notification if the key exists")]
+        public void GetByKey_ShouldReturnANotification_KeyExists ()
+        {
+            _sut = new Notifier();
+            _sut.AddNotification(new("key", "value"));
+            Assert.NotNull(_sut.GetByKey("key").First());
+        }
+        
+        [Fact(DisplayName = "13 - GetByKey should return null if the key not exists")]
+        public void GetByKey_ShouldReturnNull_KeyNotExists ()
+        {
+            _sut = new Notifier();
+            Assert.Null(_sut.GetByKey("key"));
+        }
+
+        #endregion
+
+        #region GetByMessage
+
+        [Fact(DisplayName = "14 - GetByMessage must throw ArgumentException if the key is null or empty")]
+        public void GetByMessage_MustThrowArgumentException_KeyIsNullOrEmpty ()
+        {
+            _sut = new Notifier();
+            Assert.Throws<ArgumentException>(() => _sut.GetByMessage(null));
+        }
+        
+        [Fact(DisplayName = "15 - GetByMessage should return a notification if the key exists")]
+        public void GetByMessage_ShouldReturnANotification_KeyExists ()
+        {
+            _sut = new Notifier();
+            _sut.AddNotification(new("key", "value"));
+            Assert.NotNull(_sut.GetByMessage("value").First());
+        }
+        
+        [Fact(DisplayName = "16 - GetByMessage should return null if the key not exists")]
+        public void GetByMessage_ShouldReturnNull_KeyNotExists ()
+        {
+            _sut = new Notifier();
+            Assert.Null(_sut.GetByMessage("value"));
+        }
+
+        #endregion
+        
+        #region GetBy
+
+        [Fact(DisplayName = "17 - GetBy must throw ArgumentException if the key is null or empty")]
+        public void GetBy_MustThrowArgumentException_KeyIsNullOrEmpty ()
+        {
+            _sut = new Notifier();
+            Assert.Throws<ArgumentException>(() => _sut.GetBy(null));
+        }
+        
+        [Fact(DisplayName = "18 - GetBy should return a notification if the key exists")]
+        public void GetBy_ShouldReturnANotification_KeyExists ()
+        {
+            _sut = new Notifier();
+            _sut.AddNotification(new("key", "value"));
+            Assert.NotNull(_sut.GetBy(x => x.Key == "key").First());
+        }
+        
+        [Fact(DisplayName = "19 - GetBy should return null if the key not exists")]
+        public void GetBy_ShouldReturnNull_KeyNotExists ()
+        {
+            _sut = new Notifier();
+            Assert.Null(_sut.GetBy(x => x.Key == "key"));
+        }
+
+        #endregion
+
+        #region Any
+
+        [Fact(DisplayName = "20 - Any must throw ArgumentException if the key is null or empty")]
+        public void Any_MustThrowArgumentException_KeyIsNullOrEmpty ()
+        {
+            _sut = new Notifier();
+            Assert.Throws<ArgumentException>(() => _sut.Any(null));
+        }
+        
+        [Fact(DisplayName = "21 - Any should return true if the key exists")]
+        public void Any_ShouldReturnANotification_KeyExists ()
+        {
+            _sut = new Notifier();
+            _sut.AddNotification(new("key", "value"));
+            var result = _sut.Any(x => x.Key == "key");
+            Assert.True(result);
+        }
+        
+        [Fact(DisplayName = "22 - Any should return false if the key not exists")]
+        public void Any_ShouldReturnFalse_KeyNotExists ()
+        {
+            _sut = new Notifier();
+            var result = _sut.Any(x => x.Key == "key");
+            Assert.False(result);
+        }
+
+        #endregion
+        
         #region Helpers
 
         private class ExampleEntity
