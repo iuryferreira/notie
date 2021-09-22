@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
@@ -11,22 +12,22 @@ namespace Notie.Contracts
     /// </summary>
     public abstract class AbstractNotifier : INotifier
     {
-        private protected readonly List<Notification> _notifications;
+        private protected readonly List<Notification> Notifications;
 
         protected AbstractNotifier ()
         {
-            _notifications = new();
-            NotificationType = "Default";
+            Notifications = new();
         }
-
-        public IReadOnlyCollection<Notification> Notifications => _notifications;
-        public bool HasNotifications => _notifications.Any();
-        public string NotificationType { get; private protected set; }
 
         public abstract void AddNotification (Notification notification);
         public abstract void AddNotifications (IEnumerable<Notification> notifications, bool overwrite = false);
         public abstract void AddNotificationsByFluent (ValidationResult validationResult, bool overwrite = false);
-        public abstract void SetNotificationType (string type);
+        public abstract IReadOnlyCollection<Notification> All ();
+        public abstract IReadOnlyCollection<Notification> GetByKey (string key);
+        public abstract IReadOnlyCollection<Notification> GetByMessage (string message);
+        public abstract IReadOnlyCollection<Notification> GetBy (Func<Notification, bool> condition);
+        public abstract bool Any (Func<Notification, bool> condition);
+        public abstract bool HasNotifications ();
         public abstract void Clear ();
     }
 }
