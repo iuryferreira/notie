@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
-  <ItemGroup></ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.3.3" />
   </ItemGroup>
