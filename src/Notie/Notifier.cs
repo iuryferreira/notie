@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentValidation.Results;
 using Notie.Contracts;
 using Notie.Exceptions;
@@ -23,7 +24,7 @@ namespace Notie
                 throw new NotificationIsNullException();
             }
 
-            _notifications.Add(notification);
+            Notifications.Add(notification);
         }
 
         public override void AddNotifications (IEnumerable<Notification> notifications, bool overwrite = false)
@@ -32,10 +33,10 @@ namespace Notie
             {
                 if (overwrite)
                 {
-                    _notifications.Clear();
+                    Notifications.Clear();
                 }
 
-                _notifications.AddRange(notifications);
+                Notifications.AddRange(notifications);
             }
             catch (ArgumentNullException)
             {
@@ -52,7 +53,7 @@ namespace Notie
 
             if (overwrite)
             {
-                _notifications.Clear();
+                Notifications.Clear();
             }
 
             foreach (var error in validationResult.Errors)
@@ -64,14 +65,38 @@ namespace Notie
             }
         }
 
-        public override void SetNotificationType (string type)
+        public override IReadOnlyCollection<Notification> All () => Notifications;
+
+        public override IReadOnlyCollection<Notification> GetByKey (string key)
         {
-            NotificationType = type ?? throw new NotificationTypeIsNullException();
+            if (string.IsNullOrEmpty(key)) throw new ArgumentException($"'{nameof(key)}' cannot be null or empty.");
+            var result = Notifications.Where(notification => notification.Key.Equals(key)).ToList();
+            return result.Count.Equals(0) ? null : result;
         }
 
-        public override void Clear ()
+        public override IReadOnlyCollection<Notification> GetByMessage (string message)
         {
-            _notifications.Clear();
+            if (string.IsNullOrEmpty(message))
+                throw new ArgumentException($"'{nameof(message)}' cannot be null or empty.");
+            var result = Notifications.Where(notification => notification.Message.Equals(message)).ToList();
+            return result.Count.Equals(0) ? null : result;
         }
+
+        public override IReadOnlyCollection<Notification> GetBy (Func<Notification, bool> condition)
+        {
+            if (condition is null) throw new ArgumentException($"'{nameof(condition)}' cannot be null.");
+            var result = Notifications.Where(condition).ToList();
+            return result.Count.Equals(0) ? null : result;
+        }
+
+        public override bool Any (Func<Notification, bool> condition)
+        {
+            if (condition is null) throw new ArgumentException($"'{nameof(condition)}' cannot be null.");
+            return Notifications.Any(condition);
+        }
+
+        public override bool HasNotifications () => Notifications.Any();
+
+        public override void Clear () => Notifications.Clear();
     }
 }
