@@ -41,6 +41,8 @@
 
 Notie é uma maneira simples de implementar o *Notification Pattern* para agrupar suas validações. A diferença é que ele é multifuncional, então você pode usá-lo para notificações em qualquer classe ou camada que desejar. Faça o que você quiser! 😄
 
+Ele contém uma classe `Notifier` que é responsável por gerenciar as notificações do tipo `Notification`. 
+
 ### 🛠 Instalação
 
 Use os meios de instalação abaixo.
@@ -57,13 +59,13 @@ Para instalar pela linha de comando (CLI), basta executar o seguinte comando na 
 
 Basta pesquisar por "Notie" em seu Visual Studio/Rider e clicar em adicionar pacote.
 
-### 💻 Formas de uso
+### 💻 Funcionamento
 
 Notie é intuitivo e você pode usar a documentação fornecida pelo código para ajudá-lo, mas também deixarei exemplos aqui.
 
-#### Exemplos
+#### AddNotification
 
-Você pode usá-lo de várias maneiras, mas aqui está um exemplo de como salvar suas notificações:
+O AddNotification recebe um objeto `Notification` que contém uma chave e valor, que poderia ser o campo e a mensagem que deseja informar.
 
 ```csharp
 using Notie;
@@ -71,18 +73,23 @@ using Notie;
 // your validation here...
 
 var notification = new Notification("any_key", "any_message");
-var notifier = new Notifier();
+INotifier notifier = new Notifier();
 
 notifier.AddNotification(notification);
 
-if (notifier.HasNotifications)
+if (notifier.HasNotifications())
 {
   // Handle...
 }
 
 ```
 
-Você pode até receber uma lista de notificações por meio do método `AddNotifications`. Se as notificações já existirem no notificador, elas serão mescladas por padrão. Consultar exemplo:
+No caso acima, você cria um objeto da classe `Notification` e adiciona ao seu `Notifier`.
+
+#### AddNotifications
+
+
+Você pode receber uma lista de notificações por meio do método `AddNotifications`. Se já existirem notificações no `Notifier`, elas serão mescladas por padrão. Consultar exemplo:
 
 ```csharp
 using Notie;
@@ -95,11 +102,11 @@ List<Notification> notifications = new()
   new("other_key", "other_message")
 };
 
-var notifier = new Notifier();
+INotifier notifier = new Notifier();
 
 notifier.AddNotifications(notifications);
 
-if (notifier.HasNotifications)
+if (notifier.HasNotifications())
 {
   // Handle...
 }
@@ -109,35 +116,20 @@ if (notifier.HasNotifications)
 Se você quiser sobrescrever as notificações anteriores, apenas defina o parâmetro `overwrite` como` true`, conforme mostrado abaixo.
 
 ```csharp
-using Notie;
+// ...
 
-// your validation here...
-var notifier = new Notifier();
-var notification = new Notification("any_key", "any_message");
-notifier.AddNotification(notification);
+notifier.AddNotifications(notifications, overwrite: true);
 
-List<Notification> notifications = new()
-{
-  new("any_key", "any_message"),
-  new("other_key", "other_message")
-};
-
-var notifier = new Notifier();
-
-notifier.AddNotifications(notifications, true);
-
-if (notifier.HasNotifications)
+if (notifier.HasNotifications())
 {
   // Handle...
 }
 
 ```
 
-Se você deseja limpar todas as notificações, pode fazê-lo usando o método `Clear`.
+#### AddNotificationsByFluent
 
-#### Combinando com o FluentValidation
-
-Você também pode receber notificações do FluentValidation por meio do método `AddNotificationsByFluent`, passando um `ValidationResult` e o parâmetro `overwrite` como `true` caso queira limpar as notificações anteriores:
+O Notie tem suporte ao FluentValidation. Se você o utiliza para realizar as validações, você pode integrá-las através do método `AddNotificationsByFluent`, passando um `ValidationResult`.
 
 ```csharp
 using Notie;
@@ -146,37 +138,160 @@ Entity entity = new Entity();
 EntityValidator validator = new EntityValidator();
 ValidationResult result = validator.Validate(entity);
 
-var notifier = new Notifier();
-notifier.AddNotificationsByFluent(result, true);
+INotifier notifier = new Notifier();
+notifier.AddNotificationsByFluent(result);
 
-if (notifier.HasNotifications)
+if (notifier.HasNotifications())
 {
   // Handle...
 }
 ```
 
-#### Definindo tipos de notificação
+Se você quiser sobrescrever as notificações anteriores, apenas defina o parâmetro `overwrite` como` true`, conforme mostrado abaixo.
 
-Cada notificador pode estar em um contexto diferente, e para isso podemos definir tipos para ele através da propriedade `NotificationType`. Você pode ter notificações de repositório, validação ou qualquer outro serviço que precisar, então você pode separar as notificações de cada contexto e entender qual parte do aplicativo está trazendo as notificações. Por padrão o valor para o `NotificationType` é `"Default"`. Veja o exemplo abaixo:
+```csharp
+// ...
+
+notifier.AddNotificationsByFluent(notifications, overwrite: true);
+
+if (notifier.HasNotifications())
+{
+  // Handle...
+}
+
+```
+#### All
+
+Para listar todas as notificações contidas no `Notifier` basta chamar o método `All`, como mostra o exemplo abaixo:
+
 
 ```csharp
 using Notie;
 
-// In the repository
+INotifier notifier = new Notifier();
 
-var notifier = new Notifier();
-notifier.SetNotificationType("Repository");
+// ...
 
-// In the Domain
-
-var notifier = new Notifier();
-notifier.SetNotificationType("Validation");
-
-// In the user service
-
-var notifier = new Notifier();
-notifier.SetNotificationType("Service");
+notifier.All()
 
 ```
+
+#### HasNotifications
+
+Para verificar se existem notificações no `Notifier` basta chamar o método `HasNotifications`, como mostra o exemplo abaixo:
+
+
+```csharp
+using Notie;
+
+INotifier notifier = new Notifier();
+
+// ...
+
+bool exists = notifier.HasNotifications()
+
+```
+
+#### GetByKey
+
+Se você deseja obter notificações baseadas nas chaves, poderá utilizar o método `GetByKey`. Você fornece o nome da chave e recebe uma lista das notificações que contém a chave informada, como no exemplo abaixo:
+
+```csharp
+using Notie;
+
+INotifier notifier = new Notifier();
+
+// ...
+
+var notifications = notifier.GetByKey("any_key")
+
+```
+
+#### GetByMessage
+
+Se você deseja obter notificações baseadas nas mensagens, poderá utilizar o método `GetByMessage`. Você fornece uma mensagem e recebe uma lista das notificações que contém a mensagem informada, como no exemplo abaixo:
+
+```csharp
+using Notie;
+
+INotifier notifier = new Notifier();
+
+// ...
+
+var notifications = notifier.GetByMessage("any_message")
+
+```
+
+#### GetBy
+Você também pode passar uma expressão para o método `GetBy`. Assim você pode verificar através da mensagem e da chave, caso preferir.
+
+```csharp
+using Notie;
+
+INotifier notifier = new Notifier();
+
+// ...
+
+var notifications = notifier.GetBy(x => x.Key == "any_key" && x.Message == "any_message")
+
+```
+
+#### Any
+
+O método `Any` é responsável por verificar se existe uma notificação baseado na expressão informada.
+
+```csharp
+using Notie;
+
+INotifier notifier = new Notifier();
+
+// ...
+
+bool exists = notifier.Any(x => x.Key == "any_key" && x.Message == "any_message")
+
+```
+
+#### Clear
+
+
+Se você deseja limpar todas as notificações, pode fazê-lo usando o método `Clear`.
+
+```csharp
+using Notie;
+
+INotifier notifier = new Notifier();
+
+// ...
+
+notifier.Clear()
+
+```
+
+
+
+
+
+
+
+
+### ℹ Injeção de Dependência
+
+Se você deseja utilizar com ASP.NET ou consumir via construtor, você pode adicionar a sua coleção de serviços `IServiceCollection`. Basta inserir no seu arquivo `Statup.cs` no método `ConfigureServices` a seguinte chamada:
+
+```csharp
+using Notie;
+
+// ...
+
+public void ConfigureServices (IServiceCollection services)
+{
+  services.AddNotie();
+}
+
+// ...
+
+```
+
+### 📢 Observações
 
 Essa documentação será incrementada conforme o projeto avança. Caso tenha dúvidas contate-me ou abra uma *issue*, a qual responderei o mais rápido possível. Fico feliz com seu comentário. 😄

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FluentValidation.Results;
 using Notie.Models;
@@ -10,6 +11,8 @@ namespace Notie.Contracts
     /// </summary>
     public interface INotifier
     {
+        #region Add
+
         /// <summary>
         ///     Add a notification to the notification list.
         /// </summary>
@@ -42,19 +45,66 @@ namespace Notie.Contracts
         /// </exception>
         void AddNotificationsByFluent (ValidationResult validationResult, bool overwrite = false);
 
+        #endregion
+
+        #region Get
+
         /// <summary>
-        ///     Defines the type of notification.
+        ///     List all notifications.
         /// </summary>
-        /// <param name="type">A name for the type of notifications you are handling.</param>
-        /// <exception cref="Exceptions.NotificationTypeIsNullException">
-        ///     The exception is thrown when a null
-        ///     type is passed to the method that does not allow this operation.
+        IReadOnlyCollection<Notification> All ();
+        
+        /// <summary>
+        ///     Get a notification for the entered key.
+        /// </summary>
+        /// <param name="key">Non-empty key to search the notifications list.</param>
+        /// <exception cref="ArgumentException">
+        ///     The exception is thrown when a empty or null
+        ///     key is passed to the method that does not allow this operation.
         /// </exception>
-        void SetNotificationType (string type);
+        IReadOnlyCollection<Notification> GetByKey (string key);
+        /// <summary>
+        ///     Get a notification for the entered message.
+        /// </summary>
+        /// <param name="message">Non-empty message to search the notifications list.</param>
+        /// <exception cref="ArgumentException">
+        ///     The exception is thrown when a empty or null
+        ///     message is passed to the method that does not allow this operation.
+        /// </exception>
+        IReadOnlyCollection<Notification> GetByMessage (string message);
+        /// <summary>
+        ///     Get a notification for the entered condition.
+        /// </summary>
+        /// <param name="condition">Non-null condition to search the notifications list.</param>
+        /// <exception cref="ArgumentException">
+        ///     The exception is thrown when a empty or null
+        ///     condition is passed to the method that does not allow this operation.
+        /// </exception>
+        IReadOnlyCollection<Notification> GetBy (Func<Notification, bool> condition);
+        /// <summary>
+        ///     Checks whether a given notification exists based on a given condition.
+        /// </summary>
+        /// <param name="condition">Non-null condition to check in the notifications list.</param>
+        /// <exception cref="ArgumentException">
+        ///     The exception is thrown when a empty or null
+        ///     condition is passed to the method that does not allow this operation.
+        /// </exception>
+        public bool Any (Func<Notification, bool> condition);
+
+        #endregion
+
+        #region Others
+        
+        /// <summary>
+        ///     Check the notifier for notifications.
+        /// </summary>
+        bool HasNotifications ();
 
         /// <summary>
         ///     Remove all notifications.
         /// </summary>
         void Clear ();
+        
+        #endregion
     }
 }
