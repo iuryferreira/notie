@@ -84,7 +84,27 @@ if (notifier.HasNotifications())
 
 ```
 
-No caso acima, você cria um objeto da classe `Notification` e adiciona ao seu `Notifier`.
+No caso acima, você cria um objeto da classe `Notification` e adiciona ao seu `Notifier`. Caso deseje passar mais algum dado adicional, informe o tipo do dado na classe e seu valor através do parâmetro `data`, como no exemplo abaixo:
+
+```csharp
+using Notie;
+
+// your validation here...
+
+var extraInfo = "info"
+var notification = new Notification<string>("any_key", "any_message", extraInfo);
+
+INotifier notifier = new Notifier();
+
+notifier.AddNotification(notification);
+
+if (notifier.HasNotifications())
+{
+  // Handle...
+}
+
+```
+
 
 #### AddNotifications
 
@@ -266,13 +286,6 @@ INotifier notifier = new Notifier();
 notifier.Clear()
 
 ```
-
-
-
-
-
-
-
 
 ### ℹ Injeção de Dependência
 
