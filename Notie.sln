@@ -5,9 +5,9 @@ VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C17FE48B-172C-404E-8653-206AAEA34C9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "src\Tests\Tests.csproj", "{E2E5E3F9-9520-4C53-8E3F-1D028DE2779A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notie.Test", "src\Notie.Test\Notie.Test.csproj", "{E2E5E3F9-9520-4C53-8E3F-1D028DE2779A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notie", "src\Notie\Notie.csproj", "{00CF6843-5A0E-48B4-BF46-57E88F91070E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notie.Application", "src\Notie.Application\Notie.Application.csproj", "{00CF6843-5A0E-48B4-BF46-57E88F91070E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
