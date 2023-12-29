@@ -9,16 +9,26 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
       
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Set up .NET 5.0
+        uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '5.0.x'    
-
+          
+      - name: Set up .NET 6.0
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+          
+      - name: Set up .NET 8.0
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.0.x'
+      
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
@@ -38,4 +48,3 @@ jobs:
 
       - name: Publish to Nuget Gallery
         run: dotnet nuget push "./src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
-
