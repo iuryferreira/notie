@@ -27,7 +27,7 @@ public class Notifier : AbstractNotifier
         Notifications.Add(notification);
     }
 
-    public override void AddNotifications(IEnumerable<Notification> notifications, bool overwrite = false)
+    public override void AddNotifications (IEnumerable<Notification> notifications, bool overwrite = false)
     {
         if (notifications == null)
         {
@@ -65,22 +65,26 @@ public class Notifier : AbstractNotifier
 
     public override IReadOnlyCollection<Notification> All () => Notifications;
 
-    public override IReadOnlyCollection<Notification> GetByKey(string key)
+    public override IReadOnlyCollection<Notification> GetByKey (string key)
     {
         if (string.IsNullOrEmpty(key))
         {
             throw new ArgumentException($"'{nameof(key)}' cannot be null or empty.");
         }
-        return Notifications.Where(notification => notification.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+        var notifications = Notifications.Where(notification => notification.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        return notifications.Count.Equals(0) ? null : notifications;
     }
 
-    public override IReadOnlyCollection<Notification> GetByMessage(string message)
+    public override IReadOnlyCollection<Notification> GetByMessage (string message)
     {
         if (string.IsNullOrEmpty(message))
         {
             throw new ArgumentException($"'{nameof(message)}' cannot be null or empty.");
         }
-        return Notifications.Where(notification => notification.Message.Equals(message, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+        var notifications = Notifications.Where(notification => notification.Message.Equals(message, StringComparison.InvariantCultureIgnoreCase)).ToList();
+        return notifications.Count.Equals(0) ? null : notifications;
     }
 
     public override IReadOnlyCollection<Notification> GetBy (Func<Notification, bool> condition)
