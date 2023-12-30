@@ -9,6 +9,7 @@
         <Company>Iury Ferreira</Company>
         <PackageIcon>icon.png</PackageIcon>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/iuryferreira/notie</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageProjectUrl>https://github.com/iuryferreira/notie</PackageProjectUrl>
@@ -18,7 +19,7 @@
         <DefaultVersion Condition="'$(Version)' == ''">2.0.0</DefaultVersion>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="../../LICENSE.md" Pack="true" PackagePath="LICENSE.md" />
-        <None Include="../../.github/assets/icon.png" Pack="true" PackagePath="" />
+        <None Include="../../LICENSE.md" Pack="true" PackagePath="LICENSE.md"/>
+        <None Include="../../.github/assets/icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>
