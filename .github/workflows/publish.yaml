@@ -44,7 +44,7 @@ jobs:
         run: dotnet pack --configuration Release
 
       - name: Publish to Github
-        run: dotnet nuget push "src/Notie/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/iuryferreira/index.json --skip-duplicate
+        run: dotnet nuget push .\src\Notie\bin\Release\*.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/iuryferreira/index.json --skip-duplicate
 
       - name: Publish to Nuget Gallery
-        run: dotnet nuget push "src/Notie/bin/Release/*.nupkg" -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push .\src\Notie\bin\Release\*.nupkg -k ${{ secrets.NOTIE_NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
